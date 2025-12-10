@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>0diVerse Gateway</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="0din's mythic gateway: Twitch, Gods Unchained, $GCAβ, RuneTunes, Solivre and more."
+  />
+  <style>
+    :root {
+      --bg: #050612;
+      --bg-soft: #0b0f23;
+      --accent-gold: #d4af37;
+      --accent-cyan: #00ffff;
+      --text-main: #f5f5f5;
+      --text-muted: #a0a7c3;
+      --border-soft: #20263f;
+      --card-radius: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #11152f 0, #050612 55%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-gold);
+      background: #111;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+    }
+
+    .hero-text h1 {
+      font-size: 2.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-text h1 span {
+      color: var(--accent-gold);
+    }
+
+    .hero-text p {
+      margin-top: 6px;
+      color: var(--text-muted);
+      max-width: 580px;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: var(--accent-cyan);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      background: rgba(8, 12, 32, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    nav {
+      margin: 16px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 10px 0;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.5fr) minmax(0, 1.3fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 840px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: linear-gradient(145deg, #080b1a, #050712);
+      border-radius: var(--card-radius);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent-gold);
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 2px;
+      color: #ffffff;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill-link {
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 3px 10px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      background: rgba(0, 255, 255, 0.04);
+      color: var(--accent-cyan);
+    }
+
+    .pill-link:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin: 6px 0 10px;
+    }
+
+    .highlight {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .lore-list {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .lore-list li {
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 16px;
+    }
+
+    .footer span {
+      color: var(--accent-gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <!-- Replace the background-image with your avatar path -->
+      <div
+        class="avatar"
+        style="background-image:url('./assets/avatar-gigachad.png');"
+      ></div>
+      <div class="hero-text">
+        <h1>Welcome to the <span>0diVerse</span></h1>
+        <p>
+          Central gateway into my worlds: Twitch streams, Gods Unchained,
+          $GCAβ chaos, RuneTunes mythic music, and Solivre’s sovereign tools.
+        </p>
+        <div class="tagline">Alpha mind. Still βeta. Always building.</div>
+        <div class="chips">
+          <span class="chip">🎮 S1r0din • Gods Unchained</span>
+          <span class="chip">🪙 BTC • ETH • $GCAβ</span>
+          <span class="chip">🎧 RuneTunes</span>
+          <span class="chip">🛠️ Solivre / Livre OS</span>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-links">
+        <a href="#realms">Realms</a>
+        <a href="#crypto">Crypto</a>
+        <a href="#runetunes">RuneTunes</a>
+        <a href="#solivre">Solivre</a>
+        <a href="#lore">Lore</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- LEFT COLUMN: main realms -->
+      <section>
+        <div class="section-title" id="realms">Primary Realms</div>
+
+        <div class="card">
+          <h2>S1r0din • Twitch & Gods Unchained</h2>
+          <p>
+            Live jank decks, GU experiments, and community chaos from Odin’s
+            forge. Jank One team, league formats, spuds, and memes with a
+            scoreboard.
+          </p>
+          <div class="pill-row">
+            <a class="pill-link" href="https://twitch.tv/s1r0din" target="_blank">Watch on Twitch</a>
+            <a class="pill-link" href="https://discord.gg/yzzYVGKVwA" target="_blank">Join Gaming Discord</a>
+            <a class="pill-link" href="https://discord.gg/tD7tTZdTKw" target="_blank">Jank One Info</a>
+          </div>
+        </div>
+
+        <div class="card" id="crypto">
+          <h2>$GCAβ • Gigachad Alpha (still βeta)</h2>
+          <p>
+            A memecoin experiment orbiting around discipline, memes, and
+            vault logic. No fake roadmap worship. Just honest degen philosophy
+            and long-term thinking.
+          </p>
+          <p style="margin-top:6px;font-size:0.8rem;">
+            <span class="highlight">Fine print:</span>
+            Memecoin. Not retirement plan. Consume memes responsibly. 😤🔥
+          </p>
+          <div class="pill-row">
+            <a class="pill-link" href="https://clanker.world/clanker/0x6d0B8eB75E9d6735cc301c3a6E82adeE43590B07" target="_blank">Chart / DEX</a>
+            <a class="pill-link" href="https://app.uniswap.org/swap?chain=base&inputCurrency=NATIVE&outputCurrency=0x6d0b8eb75e9d6735cc301c3a6e82adee43590b07&value=0.0010&field=input" target="_blank">Get GCAbβ</a>
+            <a class="pill-link" href="https://discord.gg/bB5WRbemFR" target="_blank">HODLers Discord</a>
+          </div>
+        </div>
+
+        <div class="card" id="runetunes">
+          <h2>RuneTunes • Mythic Audio Realm</h2>
+          <p>
+            Mythwave, RunePhonk, Rune Lo-fi and cinematic trap weaving a
+            runic mythos. Each track is part of a bigger YGG protocol —
+            artifacts, sigils, and scrolls included.
+          </p>
+          <div class="pill-row">
+            <a class="pill-link" href="https://www.youtube.com/@MyRuneTunes" target="_blank">RuneTunes YouTube</a>
+            <a class="pill-link" href="https://www.youtube.com/playlist?list=PLJ8Ygn-CC4Rke4eaZouOPDsrOHZgaqQo5" target="_blank">Youtube playlist</a>
+            <a class="pill-link" href="https://spudverse.my.canva.site/" target="_blank">Codex & Lore</a>
+          </div>
+        </div>
+
+        <div class="card" id="solivre">
+          <h2>Solivre / Livre OS • Sovereign Tools</h2>
+          <p>
+            R&amp;D playground for identity, proofs, token mechanics and
+            long-term life infrastructure. Built slowly, designed for real
+            humans, not exit liquidity.
+          </p>
+          <div class="pill-row">
+            <a class="pill-link" href="https://livre-os.github.io/website/" target="_blank">Solivre GitHub</a>
+            <a class="pill-link" href="https://www.notion.so/LIVRE-OS-b61b4144def64fc9984df1aebf875cc3" target="_blank">Docs / Whiteboard</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Merch Forge • Physical Realm</h2>
+          <p>
+            Hoodies, tees and mythic drops spanning 0din, RuneTunes, Jank One
+            and $GCAβ. The bridge between digital lore and what you actually
+            wear on stream or IRL.
+          </p>
+          <div class="pill-row">
+            <a class="pill-link" href="https://0din-shop.fourthwall.com/en-eur" target="_blank">0din Shop</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: lore, timeline, contact -->
+      <aside>
+        <div class="section-title" id="lore">Lore Snapshot</div>
+        <div class="card">
+          <h3>Mythic Stack</h3>
+          <ul class="lore-list">
+            <li><span class="highlight">0din:</span> central node, realm weaver.</li>
+            <li><span class="highlight">S1r0din:</span> streaming avatar & GU warlord.</li>
+            <li><span class="highlight">RuneTunes:</span> audio codex of the myth.</li>
+            <li><span class="highlight">$GCAβ:</span> Solar memecoin experiment.</li>
+            <li><span class="highlight">Solivre:</span> sovereign infra & life OS.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Project Timeline (Very βeta)</h3>
+          <ul class="lore-list">
+            <li>🌀 RuneTunes mythic arc begins.</li>
+            <li>🔥 S1r0din climbs Gods Unchained ladders.</li>
+            <li>🌞 $GCAβ erupts from the solar meme core.</li>
+            <li>🛡️ Solivre / Livre OS drafts the sovereign stack.</li>
+            <li>👕 Merch Forge & physical artifacts appear.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="contact">
+          <h3>Contact & Collabs</h3>
+          <p>
+            If you want to build, sponsor, collab, or just send cursed memes:
+          </p>
+          <ul class="lore-list" style="margin-top:6px;">
+            <li>🐦 X (Twitter): <a href="https://x.com/@OdinBor57812303" target="_blank">@0din</a></li>
+            <li>💬 Discord: <span class="highlight">sir0din</span></li>
+            <li>📧 Email: <span class="highlight">sir0din@proton.me</span></li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <div class="footer">
+      <span>0din Verse</span> • Built in public on GitHub • Still βeta, by design.
+    </div>
+  </div>
+</body>
+</html>
